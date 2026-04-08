@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News & Tips - CyberShield</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        CyberShield
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="encyclopedia/index.html">Encyclopedia</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="checklist.html">Checklist</a></li>
+        <li><a href="feed.html" class="active">Feed</a></li>
+        <li><a href="login.html" id="authLink">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <h1>News & Tips</h1>
+      <p>Stay informed about the latest cybersecurity news and best practices.</p>
+    </div>
+
+    <div class="filter-buttons">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Tips</button>
+      <button class="filter-btn">News</button>
+      <button class="filter-btn">Awareness</button>
+    </div>
+
+    <div id="feedGrid" class="feed-grid"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 CyberShield. Stay safe online.</p>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script>
+    window.utils = utils;
+  </script>
+  <script src="js/feed.js"></script>
+</body>
+</html>

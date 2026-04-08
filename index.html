@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberShield - Cyber Awareness Portal</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        CyberShield
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="encyclopedia/index.html">Encyclopedia</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="checklist.html">Checklist</a></li>
+        <li><a href="feed.html">Feed</a></li>
+        <li><a href="login.html" id="authLink">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Protect Yourself in the Digital World</h1>
+      <p>Learn about cyber threats, test your knowledge, and build good security habits with CyberShield.</p>
+      <div class="buttons">
+        <a href="quiz.html" class="btn btn-primary">Take a Quiz</a>
+        <a href="encyclopedia/index.html" class="btn btn-secondary">Learn More</a>
+      </div>
+    </section>
+
+    <section class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Malware Types</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">10</div>
+        <div class="stat-label">Quiz Questions</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">15+</div>
+        <div class="stat-label">Security Tips</div>
+      </div>
+    </section>
+
+    <section>
+      <h2 style="margin-bottom: 24px;">Tip of the Day</h2>
+      <div id="tipOfDay" class="card">
+        <p>Loading...</p>
+      </div>
+    </section>
+
+    <section style="margin-top: 48px;">
+      <h2 style="margin-bottom: 24px;">Quick Actions</h2>
+      <div class="grid">
+        <a href="quiz.html" class="card">
+          <h3>📝 Take a Quiz</h3>
+          <p>Test your cybersecurity knowledge with 10 questions.</p>
+        </a>
+        <a href="checklist.html" class="card">
+          <h3>✅ Security Checklist</h3>
+          <p>Follow our 15-step guide to better security.</p>
+        </a>
+        <a href="feed.html" class="card">
+          <h3>📰 News & Tips</h3>
+          <p>Stay updated with the latest security news.</p>
+        </a>
+        <a href="encyclopedia/index.html" class="card">
+          <h3>📖 Malware Encyclopedia</h3>
+          <p>Learn about different types of malware.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 CyberShield. Stay safe online.</p>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script>
+    window.utils = utils;
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      const token = localStorage.getItem('cybershield_token');
+      const authLink = document.getElementById('authLink');
+      if (token) {
+        authLink.textContent = 'Logout';
+        authLink.href = '#';
+        authLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          localStorage.removeItem('cybershield_token');
+          window.location.href = 'login.html';
+        });
+      }
+
+      fetch('/api/feed')
+        .then(res => res.json())
+        .then(data => {
+          if (data.feed && data.feed.length > 0) {
+            const tip = data.feed[Math.floor(Math.random() * data.feed.length)];
+            document.getElementById('tipOfDay').innerHTML = `
+              <span class="tip-tag ${tip.category.toLowerCase()}">${tip.category}</span>
+              <h3>${tip.title}</h3>
+              <p>${tip.content}</p>
+            `;
+          }
+        })
+        .catch(err => {
+          document.getElementById('tipOfDay').innerHTML = '<p>Could not load tip. Please try again.</p>';
+        });
+    });
+  </script>
+</body>
+</html>

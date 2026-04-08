@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist & Practice - CyberShield</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        CyberShield
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="encyclopedia/index.html">Encyclopedia</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="checklist.html" class="active">Checklist</a></li>
+        <li><a href="feed.html">Feed</a></li>
+        <li><a href="login.html" id="authLink">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <h1>Security Checklist</h1>
+      <p>Track your progress toward better cybersecurity habits. Sign in to save your progress.</p>
+    </div>
+
+    <div class="card" style="margin-bottom: 48px;">
+      <div class="progress-bar">
+        <div id="progressBar" class="progress-bar-fill" style="width: 0%;"></div>
+      </div>
+      <p id="progressText" style="text-align: center; color: var(--gray);">0/15 completed</p>
+      
+      <div id="checklistItems"></div>
+    </div>
+
+    <section class="practice-section">
+      <h2>Practice Space</h2>
+      <p style="color: var(--gray); margin-bottom: 24px;">Test your skills with these interactive exercises.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Password Strength Tester</h3>
+          <p style="color: var(--gray); margin-bottom: 16px;">Enter a password to test its strength.</p>
+          <input type="text" id="passwordInput" placeholder="Enter a password to test">
+          <div id="passwordResult" class="password-strength">Enter a password</div>
+        </div>
+
+        <div class="card">
+          <h3>Phishing Email Spotter</h3>
+          <p style="color: var(--gray); margin-bottom: 16px;">Can you identify the red flags?</p>
+          <div id="phishingSamples" class="phishing-samples"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 CyberShield. Stay safe online.</p>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script>
+    window.utils = utils;
+  </script>
+  <script src="js/checklist.js"></script>
+</body>
+</html>
