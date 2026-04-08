@@ -1,6 +1,3 @@
-const { getCollection } = require('../lib/db');
-const { corsHeaders } = require('../lib/auth');
-
 const defaultFeed = [
   { title: "Use Strong, Unique Passwords", category: "Tips", content: "Create passwords with at least 12 characters mixing letters, numbers, and symbols. Use a password manager.", date: "2024-01-15" },
   { title: "Beware of Phishing Emails", category: "Awareness", content: "Check sender addresses carefully. Hover over links before clicking. When in doubt, contact the sender directly.", date: "2024-01-20" },
@@ -14,27 +11,25 @@ const defaultFeed = [
   { title: "Data Privacy Matters", category: "Awareness", content: "Limit personal info shared online. Review privacy settings on social media.", date: "2024-03-20" }
 ];
 
-module.exports = async function handler(req, res) {
-  const headers = corsHeaders();
+module.exports = async function(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   
   if (req.method === 'OPTIONS') {
-    return res.status(200).setHeader(headers).end();
+    return res.status(200).end();
   }
   
   if (req.method !== 'GET') {
-    return res.status(405).setHeader(headers).json({ error: 'Method not allowed' });
+    return res.status(405).json({ error: 'Method not allowed' });
   }
   
-  try {
-    const category = req.query.category;
-    let feed = defaultFeed;
-    
-    if (category && category !== 'All') {
-      feed = feed.filter(item => item.category === category);
-    }
-    
-    return res.status(200).setHeader(headers).json({ feed });
-  } catch (error) {
-    return res.status(200).setHeader(headers).json({ feed: defaultFeed });
+  const category = req.query.category;
+  let feed = defaultFeed;
+  
+  if (category && category !== 'All') {
+    feed = feed.filter(item => item.category === category);
   }
+  
+  res.status(200).json({ feed });
 };
