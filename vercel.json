@@ -1,6 +1,12 @@
 {
   "output": "server",
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" }
+  "build": {
+    "env": {
+      "NODEJS_LATEST": "18"
+    }
+  },
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/index.js" },
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
